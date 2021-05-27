@@ -1,5 +1,8 @@
 //Controlador de UserController
 const userModel = require("../models/User")//Requerimos al modelo User
+const productModel = require("../models/Product")
+const ProductDescriptionModel = require("../models/ProductDescription") //Estoy llamando al modelo ProductDescription para requerirlo en este controlador
+
 /**
  * Create -> Crear una categoría
  * Read -> Leer una o más categorías
@@ -12,7 +15,7 @@ const userModel = require("../models/User")//Requerimos al modelo User
  * @param {*} res => Todo lo que le vamos a devolver al usuario (responder)
  */
 
-    //Usamos el metodo Create
+    //Usamos el metodo Create de USER
     exports.create = (req, res) =>{ //Exporta un solo método
     console.log('Que tiene el body', req.body)
     const User = new userModel({
@@ -35,6 +38,54 @@ const userModel = require("../models/User")//Requerimos al modelo User
     }
 )
 }
+
+//Método create de PRODUCT
+exports.create = (req, res) =>{
+    const product = new productModel({
+        ProductName: req.body.ProductName,
+        Price: req.body.Price,
+        Quote: req.body.Quote,
+        writeQuote: req.body.writeQuote,
+        idProductDescription: req.body.idProductDescription
+    })
+
+    product.save().then(
+        data =>{
+            res.send(data)
+        }
+    ).catch(
+        error => {
+            return res.status(500).send({
+                message: "Error al guardar el producto"
+            })
+        }
+    )
+} 
+
+
+//Usamos el metodo Create de PRODUCTDESCRIPTION
+exports.create = (req, res) =>{ //Exporta un solo método
+    console.log('Que tiene el body', req.body)
+    const productDescription = new ProductDescriptionModel({
+    chooseQuote: req.body.chooseQuote,
+    writeQuote: req.body.writeQuote
+})
+
+    //Obteniendo la constante productDescription y utilizando el método save de moongoose
+    productDescription.save().then(
+        data =>{
+            res.send(data)
+        }
+    ).catch(
+        error =>{
+            return res.status(500).send({
+                message: error.message
+            })
+        }
+    )
+}
+
+
 
 //Usamos el metodo Read
 exports.findAll = (req, res) =>{
@@ -95,3 +146,4 @@ exports.deleteOne = (req, res)=>{
         }
     )
     }
+

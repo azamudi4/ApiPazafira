@@ -14,3 +14,5 @@ app.get('/User/getAll', UserController.findAll)
 app.delete('/User/deleteOne/:id', UserController.deleteOne) // Usamos la ruta para eliminar mediante el id un Usuario
 }
 
+
+

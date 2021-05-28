@@ -14,7 +14,7 @@ const userModel = require("../models/User")//Requerimos al modelo User
  * @param {*} res => Todo lo que le vamos a devolver al usuario (responder)
  */
 
-    //Usamos el metodo Create de USER
+    //Usamos el metodo Create de User
     exports.create = (req, res) =>{ //Exporta un solo método
     console.log('Que tiene el body', req.body)
     const User = new userModel({

@@ -6,5 +6,8 @@ const userSchema = new moongoose.Schema({//Crear un nuevo esquema en moongoose
     CompleteName:{type: String, require: true},//Es tipo String y es obligatorio
     Email:{type: String, require: true},//Es tipo String y es obligatorio
     PhoneNumber:{type: Number, require:true},//Es tipo Number y es obligatorio
+    ProductName: { type: String, require: true },//Es tipo String y es obligatorio
+    chooseQuote:{type: String, require: false}, //Es tipo String y no es obligatorio
+    writeQuote:{type: String, require: false}, //Es tipo String y no es obligatorio
 })
 module.exports = moongoose.model('User', userSchema) //Vamos a exportar un modelo de moongoose, debe tener el nombre de mi modelo y el esquema
